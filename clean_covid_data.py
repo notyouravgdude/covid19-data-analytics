@@ -1,9 +1,9 @@
 import pandas as pd
 
-# Load the original file (make sure it's in the same folder or give full path)
+# Load the original file
 df = pd.read_csv("owid-covid-data.csv")
 
-# Remove rows where 'continent' is NaN (e.g., World, Asia, etc.)
+# Remove rows where 'continent' is NaN
 df = df[df['continent'].notna()]
 
 # Select only the useful columns
@@ -16,11 +16,11 @@ columns_to_keep = [
 
 df = df[columns_to_keep]
 
-# Fill empty numeric values with 0 (optional)
+# Fill empty numeric values with 0
 numeric_cols = df.select_dtypes(include='number').columns
 df[numeric_cols] = df[numeric_cols].fillna(0)
 
-# Convert date column to proper format (optional but useful)
+# Convert date column to proper format
 df['date'] = pd.to_datetime(df['date']).dt.date
 
 # Save cleaned file
